@@ -4,7 +4,7 @@ use omp::players::Player;
 
 pub type CommandHandler = fn(context: CommandContext);
 
-struct Command {
+pub struct Command {
     pub identifier: String,
     pub handler: Option<CommandHandler>,
     pub validators: HashMap<u32, ArgValidator>,
@@ -17,11 +17,28 @@ pub enum ArgValidator {
     Number,
 }
 
+impl ArgValidator {
+    fn validate(&self, arg: &str) -> Result<(), String> {
+        match self {
+            ArgValidator::Player(constraints) => {
+                let id: i32 = arg.parse().map_err(|_| "Invalid player ID".to_string())?;
+
+                let player =
+                    Player::from_id(id).ok_or_else(|| format!("Player {} not found", id))?;
+
+                constraints.validate(&player)
+            }
+            ArgValidator::Number => Ok(()),
+            ArgValidator::String => Ok(()),
+            ArgValidator::Text => Ok(()),
+        }
+    }
+}
+
 pub struct PlayerConstraints {
     min_health: Option<f32>,
     max_health: Option<f32>,
     spawned: bool,
-    connected: bool,
     nick: Option<String>,
 }
 
@@ -32,12 +49,33 @@ impl PlayerConstraints {
             max_health: None,
             nick: None,
             spawned: false,
-            connected: false,
         }
     }
 
-    pub fn validate(self, player: Player) -> bool {
-        true
+    fn validate(&self, player: &Player) -> Result<(), String> {
+        if self.spawned && !player.is_spawned() {
+            return Err("Player must be spawned".to_string());
+        }
+
+        if let Some(ref nick) = self.nick {
+            if !player.get_name().contains(nick) {
+                return Err(format!("Player name must contain '{}'", nick));
+            }
+        }
+
+        if let Some(min) = self.min_health {
+            if player.get_health() < min {
+                return Err(format!("Player health must be at least {}", min));
+            }
+        }
+
+        if let Some(max) = self.max_health {
+            if player.get_health() > max {
+                return Err(format!("Player health must be at most {}", max));
+            }
+        }
+
+        Ok(())
     }
 
     pub fn min_health(mut self, health: f32) -> Self {
@@ -52,11 +90,6 @@ impl PlayerConstraints {
 
     pub fn must_be_spawned(mut self) -> Self {
         self.spawned = true;
-        self
-    }
-
-    pub fn must_be_connected(mut self) -> Self {
-        self.connected = true;
         self
     }
 
@@ -116,9 +149,9 @@ pub struct CommandManager {
 }
 
 pub struct CommandContext<'a> {
-    player: Player,
-    raw: String,
-    arg: CommandArgHandler<'a>,
+    pub player: Player,
+    pub raw: String,
+    pub arg: CommandArgHandler<'a>,
 }
 
 impl<'a> CommandContext<'a> {
@@ -131,10 +164,10 @@ impl<'a> CommandContext<'a> {
     }
 }
 
-struct CommandArgHandler<'a> {
-    args: Vec<&'a str>,
-    index: usize,
-    validators: HashMap<usize, ArgValidator>,
+pub struct CommandArgHandler<'a> {
+    pub args: Vec<&'a str>,
+    pub index: usize,
+    pub validators: &'a HashMap<u32, ArgValidator>,
 }
 
 impl<'a> CommandArgHandler<'a> {
@@ -165,6 +198,15 @@ impl<'a> CommandArgHandler<'a> {
     }
 
     pub fn next_player(&mut self) -> Result<Player, String> {
+        if let Some(validator) = self.validators.get(&(self.index as u32)) {
+            if !matches!(validator, ArgValidator::Player(_)) {
+                return Err(format!(
+                    "Validator type mismatch: expected Player validator at position {}",
+                    self.index
+                ));
+            }
+        }
+
         let Some(player_id) = self.next() else {
             return Err("Invalid player id.".into());
         };
@@ -202,6 +244,24 @@ impl CommandManager {
                 continue;
             }
 
+            for (index, validator) in &command.validators {
+                let Some(arg) = args.get(*index as usize) else {
+                    player.send_client_message(
+                        omp::types::colour::Colour::from_rgba(0xFF0000FF),
+                        &format!("Missing argument at position {}", index),
+                    );
+                    return;
+                };
+
+                if let Err(msg) = validator.validate(arg) {
+                    player.send_client_message(
+                        omp::types::colour::Colour::from_rgba(0xFF0000FF),
+                        &msg,
+                    );
+                    return;
+                }
+            }
+
             let Some(handler) = command.handler else {
                 continue;
             };
@@ -212,7 +272,7 @@ impl CommandManager {
                 CommandArgHandler {
                     args,
                     index: 0,
-                    validators: HashMap::new(),
+                    validators: &command.validators,
                 },
             ))
         }

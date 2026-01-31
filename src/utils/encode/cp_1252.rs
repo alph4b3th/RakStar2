@@ -8,4 +8,3 @@ pub fn to_cp1252(s: &str) -> Vec<u8> {
 pub fn cp1252_bytes_to_str(bytes: &[u8]) -> &str {
     unsafe { std::str::from_utf8_unchecked(bytes) }
 }
-

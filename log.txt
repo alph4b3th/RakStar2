@@ -342,3 +342,286 @@ Loaded 23 component(s) from /home/alph4b3th/Projects/Rust/rakstar2/Server/compon
 [2026-01-31T12:46:48-0300] [Info] Legacy Network started on port 7777
 [2026-01-31T12:46:50-0300] [Info] [connection] incoming connection: 172.20.224.1:60094 id: 0
 [2026-01-31T12:46:50-0300] [Info] [join] alph4b3th has joined the server (0:172.20.224.1)
+Starting open.mp server (1.5.8.3079) from commit c6759bd8d265171ae3d86598895a23d5a8d92a3b
+Running static OpenSSL build - plugins that use OpenSSL might crash (discord-connector, pawn-requests). It's recommended to use the dynssl build.
+Loaded 0 component(s) from /home/alph4b3th/Projects/Rust/rakstar2/components
+Loading component $CAPI.so
+	Successfully loaded component C-API (1.5.8.3079) with UID 10467dd8d4c56fc6
+Loading component NPCs.so
+	Successfully loaded component NPCs (1.5.8.3079) with UID 3d0e59e87f4e90bc
+Loading component rakstar.so
+	Successfully loaded component OMPRS Gamemode (0.0.0.0) with UID 17cf3c064d6c4a4c
+Loading component Databases.so
+	Successfully loaded component Databases (1.5.8.3079) with UID 80092e7eb5821a96
+Loading component TextLabels.so
+	Successfully loaded component TextLabels (1.5.8.3079) with UID a0c57ea80a009742
+Loading component Pawn.so
+	Successfully loaded component Pawn (1.5.8.3079) with UID 78906cd9f19c36a6
+Loading component Actors.so
+	Successfully loaded component Actors (1.5.8.3079) with UID c81ca021eae2ad5c
+Loading component Recordings.so
+	Successfully loaded component Recordings (1.5.8.3079) with UID 871144d399f5f613
+Loading component Variables.so
+	Successfully loaded component Variables (1.5.8.3079) with UID 75e121848bc01fa2
+Loading component LegacyConfig.so
+	Successfully loaded component LegacyConfig (1.5.8.3079) with UID 24ef6216838f9ffc
+Loading component Checkpoints.so
+	Successfully loaded component Checkpoints (1.5.8.3079) with UID 44a937350d611dde
+Loading component LegacyNetwork.so
+	Successfully loaded component RakNetLegacyNetwork (1.5.8.3079) with UID ea9799fd79cf8442
+Loading component CustomModels.so
+	Successfully loaded component CustomModels (1.5.8.3079) with UID 15e3cb1e7c77ffff
+Loading component Console.so
+	Successfully loaded component Console (1.5.8.3079) with UID bfa24e49d0c95ee4
+Loading component Timers.so
+	Successfully loaded component Timers (1.5.8.3079) with UID 2ad8124c5ea257a3
+Loading component Objects.so
+	Successfully loaded component Objects (1.5.8.3079) with UID 59f8415f72da6160
+Loading component Menus.so
+	Successfully loaded component Menus (1.5.8.3079) with UID 621e219eb97ee0b2
+Loading component basic.so
+	Failed to load component: /lib/i386-linux-gnu/libc.so.6: version `GLIBC_ABI_GNU_TLS' not found (required by /home/alph4b3th/Projects/Rust/rakstar2/Server/components/basic.so).
+Loading component TextDraws.so
+	Successfully loaded component TextDraws (1.5.8.3079) with UID 9b5dc2b1d15c992a
+Loading component Pickups.so
+	Successfully loaded component Pickups (1.5.8.3079) with UID cf304faa363dd971
+Loading component Dialogs.so
+	Successfully loaded component Dialogs (1.5.8.3079) with UID 44a111350d611dde
+Loading component Classes.so
+	Successfully loaded component Classes (1.5.8.3079) with UID 8cfb3183976da208
+Loading component Vehicles.so
+	Successfully loaded component Vehicles (1.5.8.3079) with UID 3f1f62ee9e22ab19
+Loading component GangZones.so
+	Successfully loaded component GangZones (1.5.8.3079) with UID b3351d11ee8d8056
+Loaded 23 component(s) from /home/alph4b3th/Projects/Rust/rakstar2/Server/components
+[2026-01-31T12:50:56-0300] [Info] OMPRS Gamemode component has been loaded
+[2026-01-31T12:50:56-0300] [Info] Legacy Network started on port 7777
+Starting open.mp server (1.5.8.3079) from commit c6759bd8d265171ae3d86598895a23d5a8d92a3b
+Running static OpenSSL build - plugins that use OpenSSL might crash (discord-connector, pawn-requests). It's recommended to use the dynssl build.
+Loaded 0 component(s) from /home/alph4b3th/Projects/Rust/rakstar2/components
+Loading component $CAPI.so
+	Successfully loaded component C-API (1.5.8.3079) with UID 10467dd8d4c56fc6
+Loading component NPCs.so
+	Successfully loaded component NPCs (1.5.8.3079) with UID 3d0e59e87f4e90bc
+Loading component rakstar.so
+	Successfully loaded component OMPRS Gamemode (0.0.0.0) with UID 43516824a85042af
+Loading component Databases.so
+	Successfully loaded component Databases (1.5.8.3079) with UID 80092e7eb5821a96
+Loading component TextLabels.so
+	Successfully loaded component TextLabels (1.5.8.3079) with UID a0c57ea80a009742
+Loading component Pawn.so
+	Successfully loaded component Pawn (1.5.8.3079) with UID 78906cd9f19c36a6
+Loading component Actors.so
+	Successfully loaded component Actors (1.5.8.3079) with UID c81ca021eae2ad5c
+Loading component Recordings.so
+	Successfully loaded component Recordings (1.5.8.3079) with UID 871144d399f5f613
+Loading component Variables.so
+	Successfully loaded component Variables (1.5.8.3079) with UID 75e121848bc01fa2
+Loading component LegacyConfig.so
+	Successfully loaded component LegacyConfig (1.5.8.3079) with UID 24ef6216838f9ffc
+Loading component Checkpoints.so
+	Successfully loaded component Checkpoints (1.5.8.3079) with UID 44a937350d611dde
+Loading component LegacyNetwork.so
+	Successfully loaded component RakNetLegacyNetwork (1.5.8.3079) with UID ea9799fd79cf8442
+Loading component CustomModels.so
+	Successfully loaded component CustomModels (1.5.8.3079) with UID 15e3cb1e7c77ffff
+Loading component Console.so
+	Successfully loaded component Console (1.5.8.3079) with UID bfa24e49d0c95ee4
+Loading component Timers.so
+	Successfully loaded component Timers (1.5.8.3079) with UID 2ad8124c5ea257a3
+Loading component Objects.so
+	Successfully loaded component Objects (1.5.8.3079) with UID 59f8415f72da6160
+Loading component Menus.so
+	Successfully loaded component Menus (1.5.8.3079) with UID 621e219eb97ee0b2
+Loading component basic.so
+	Failed to load component: /lib/i386-linux-gnu/libc.so.6: version `GLIBC_ABI_GNU_TLS' not found (required by /home/alph4b3th/Projects/Rust/rakstar2/Server/components/basic.so).
+Loading component TextDraws.so
+	Successfully loaded component TextDraws (1.5.8.3079) with UID 9b5dc2b1d15c992a
+Loading component Pickups.so
+	Successfully loaded component Pickups (1.5.8.3079) with UID cf304faa363dd971
+Loading component Dialogs.so
+	Successfully loaded component Dialogs (1.5.8.3079) with UID 44a111350d611dde
+Loading component Classes.so
+	Successfully loaded component Classes (1.5.8.3079) with UID 8cfb3183976da208
+Loading component Vehicles.so
+	Successfully loaded component Vehicles (1.5.8.3079) with UID 3f1f62ee9e22ab19
+Loading component GangZones.so
+	Successfully loaded component GangZones (1.5.8.3079) with UID b3351d11ee8d8056
+Loaded 23 component(s) from /home/alph4b3th/Projects/Rust/rakstar2/Server/components
+[2026-01-31T12:50:58-0300] [Info] OMPRS Gamemode component has been loaded
+[2026-01-31T12:50:58-0300] [Info] Legacy Network started on port 7777
+[2026-01-31T12:51:00-0300] [Info] [connection] incoming connection: 172.20.224.1:51474 id: 0
+[2026-01-31T12:51:00-0300] [Info] [join] alph4b3th has joined the server (0:172.20.224.1)
+Starting open.mp server (1.5.8.3079) from commit c6759bd8d265171ae3d86598895a23d5a8d92a3b
+Running static OpenSSL build - plugins that use OpenSSL might crash (discord-connector, pawn-requests). It's recommended to use the dynssl build.
+Loaded 0 component(s) from /home/alph4b3th/Projects/Rust/rakstar2/components
+Loading component $CAPI.so
+	Successfully loaded component C-API (1.5.8.3079) with UID 10467dd8d4c56fc6
+Loading component NPCs.so
+	Successfully loaded component NPCs (1.5.8.3079) with UID 3d0e59e87f4e90bc
+Loading component rakstar.so
+	Successfully loaded component OMPRS Gamemode (0.0.0.0) with UID 3132b0547a8b4cd3
+Loading component Databases.so
+	Successfully loaded component Databases (1.5.8.3079) with UID 80092e7eb5821a96
+Loading component TextLabels.so
+	Successfully loaded component TextLabels (1.5.8.3079) with UID a0c57ea80a009742
+Loading component Pawn.so
+	Successfully loaded component Pawn (1.5.8.3079) with UID 78906cd9f19c36a6
+Loading component Actors.so
+	Successfully loaded component Actors (1.5.8.3079) with UID c81ca021eae2ad5c
+Loading component Recordings.so
+	Successfully loaded component Recordings (1.5.8.3079) with UID 871144d399f5f613
+Loading component Variables.so
+	Successfully loaded component Variables (1.5.8.3079) with UID 75e121848bc01fa2
+Loading component LegacyConfig.so
+	Successfully loaded component LegacyConfig (1.5.8.3079) with UID 24ef6216838f9ffc
+Loading component Checkpoints.so
+	Successfully loaded component Checkpoints (1.5.8.3079) with UID 44a937350d611dde
+Loading component LegacyNetwork.so
+	Successfully loaded component RakNetLegacyNetwork (1.5.8.3079) with UID ea9799fd79cf8442
+Loading component CustomModels.so
+	Successfully loaded component CustomModels (1.5.8.3079) with UID 15e3cb1e7c77ffff
+Loading component Console.so
+	Successfully loaded component Console (1.5.8.3079) with UID bfa24e49d0c95ee4
+Loading component Timers.so
+	Successfully loaded component Timers (1.5.8.3079) with UID 2ad8124c5ea257a3
+Loading component Objects.so
+	Successfully loaded component Objects (1.5.8.3079) with UID 59f8415f72da6160
+Loading component Menus.so
+	Successfully loaded component Menus (1.5.8.3079) with UID 621e219eb97ee0b2
+Loading component basic.so
+	Failed to load component: /lib/i386-linux-gnu/libc.so.6: version `GLIBC_ABI_GNU_TLS' not found (required by /home/alph4b3th/Projects/Rust/rakstar2/Server/components/basic.so).
+Loading component TextDraws.so
+	Successfully loaded component TextDraws (1.5.8.3079) with UID 9b5dc2b1d15c992a
+Loading component Pickups.so
+	Successfully loaded component Pickups (1.5.8.3079) with UID cf304faa363dd971
+Loading component Dialogs.so
+	Successfully loaded component Dialogs (1.5.8.3079) with UID 44a111350d611dde
+Loading component Classes.so
+	Successfully loaded component Classes (1.5.8.3079) with UID 8cfb3183976da208
+Loading component Vehicles.so
+	Successfully loaded component Vehicles (1.5.8.3079) with UID 3f1f62ee9e22ab19
+Loading component GangZones.so
+	Successfully loaded component GangZones (1.5.8.3079) with UID b3351d11ee8d8056
+Loaded 23 component(s) from /home/alph4b3th/Projects/Rust/rakstar2/Server/components
+[2026-01-31T12:51:34-0300] [Info] OMPRS Gamemode component has been loaded
+[2026-01-31T12:51:34-0300] [Info] Legacy Network started on port 7777
+[2026-01-31T12:51:36-0300] [Info] [connection] incoming connection: 172.20.224.1:58539 id: 0
+[2026-01-31T12:51:36-0300] [Info] [join] alph4b3th has joined the server (0:172.20.224.1)
+Starting open.mp server (1.5.8.3079) from commit c6759bd8d265171ae3d86598895a23d5a8d92a3b
+Running static OpenSSL build - plugins that use OpenSSL might crash (discord-connector, pawn-requests). It's recommended to use the dynssl build.
+Loaded 0 component(s) from /home/alph4b3th/Projects/Rust/rakstar2/components
+Loading component $CAPI.so
+	Successfully loaded component C-API (1.5.8.3079) with UID 10467dd8d4c56fc6
+Loading component NPCs.so
+	Successfully loaded component NPCs (1.5.8.3079) with UID 3d0e59e87f4e90bc
+Loading component rakstar.so
+	Successfully loaded component OMPRS Gamemode (0.0.0.0) with UID 56a3e3c475504f83
+Loading component Databases.so
+	Successfully loaded component Databases (1.5.8.3079) with UID 80092e7eb5821a96
+Loading component TextLabels.so
+	Successfully loaded component TextLabels (1.5.8.3079) with UID a0c57ea80a009742
+Loading component Pawn.so
+	Successfully loaded component Pawn (1.5.8.3079) with UID 78906cd9f19c36a6
+Loading component Actors.so
+	Successfully loaded component Actors (1.5.8.3079) with UID c81ca021eae2ad5c
+Loading component Recordings.so
+	Successfully loaded component Recordings (1.5.8.3079) with UID 871144d399f5f613
+Loading component Variables.so
+	Successfully loaded component Variables (1.5.8.3079) with UID 75e121848bc01fa2
+Loading component LegacyConfig.so
+	Successfully loaded component LegacyConfig (1.5.8.3079) with UID 24ef6216838f9ffc
+Loading component Checkpoints.so
+	Successfully loaded component Checkpoints (1.5.8.3079) with UID 44a937350d611dde
+Loading component LegacyNetwork.so
+	Successfully loaded component RakNetLegacyNetwork (1.5.8.3079) with UID ea9799fd79cf8442
+Loading component CustomModels.so
+	Successfully loaded component CustomModels (1.5.8.3079) with UID 15e3cb1e7c77ffff
+Loading component Console.so
+	Successfully loaded component Console (1.5.8.3079) with UID bfa24e49d0c95ee4
+Loading component Timers.so
+	Successfully loaded component Timers (1.5.8.3079) with UID 2ad8124c5ea257a3
+Loading component Objects.so
+	Successfully loaded component Objects (1.5.8.3079) with UID 59f8415f72da6160
+Loading component Menus.so
+	Successfully loaded component Menus (1.5.8.3079) with UID 621e219eb97ee0b2
+Loading component basic.so
+	Failed to load component: /lib/i386-linux-gnu/libc.so.6: version `GLIBC_ABI_GNU_TLS' not found (required by /home/alph4b3th/Projects/Rust/rakstar2/Server/components/basic.so).
+Loading component TextDraws.so
+	Successfully loaded component TextDraws (1.5.8.3079) with UID 9b5dc2b1d15c992a
+Loading component Pickups.so
+	Successfully loaded component Pickups (1.5.8.3079) with UID cf304faa363dd971
+Loading component Dialogs.so
+	Successfully loaded component Dialogs (1.5.8.3079) with UID 44a111350d611dde
+Loading component Classes.so
+	Successfully loaded component Classes (1.5.8.3079) with UID 8cfb3183976da208
+Loading component Vehicles.so
+	Successfully loaded component Vehicles (1.5.8.3079) with UID 3f1f62ee9e22ab19
+Loading component GangZones.so
+	Successfully loaded component GangZones (1.5.8.3079) with UID b3351d11ee8d8056
+Loaded 23 component(s) from /home/alph4b3th/Projects/Rust/rakstar2/Server/components
+[2026-01-31T12:51:46-0300] [Info] OMPRS Gamemode component has been loaded
+[2026-01-31T12:51:46-0300] [Info] Legacy Network started on port 7777
+[2026-01-31T12:51:51-0300] [Info] [connection] incoming connection: 172.20.224.1:60292 id: 0
+[2026-01-31T12:51:51-0300] [Info] [join] alph4b3th has joined the server (0:172.20.224.1)
+Starting open.mp server (1.5.8.3079) from commit c6759bd8d265171ae3d86598895a23d5a8d92a3b
+Running static OpenSSL build - plugins that use OpenSSL might crash (discord-connector, pawn-requests). It's recommended to use the dynssl build.
+Loaded 0 component(s) from /home/alph4b3th/Projects/Rust/rakstar2/components
+Loading component $CAPI.so
+	Successfully loaded component C-API (1.5.8.3079) with UID 10467dd8d4c56fc6
+Loading component NPCs.so
+	Successfully loaded component NPCs (1.5.8.3079) with UID 3d0e59e87f4e90bc
+Loading component rakstar.so
+	Successfully loaded component OMPRS Gamemode (0.0.0.0) with UID d383687978094867
+Loading component Databases.so
+	Successfully loaded component Databases (1.5.8.3079) with UID 80092e7eb5821a96
+Loading component TextLabels.so
+	Successfully loaded component TextLabels (1.5.8.3079) with UID a0c57ea80a009742
+Loading component Pawn.so
+	Successfully loaded component Pawn (1.5.8.3079) with UID 78906cd9f19c36a6
+Loading component Actors.so
+	Successfully loaded component Actors (1.5.8.3079) with UID c81ca021eae2ad5c
+Loading component Recordings.so
+	Successfully loaded component Recordings (1.5.8.3079) with UID 871144d399f5f613
+Loading component Variables.so
+	Successfully loaded component Variables (1.5.8.3079) with UID 75e121848bc01fa2
+Loading component LegacyConfig.so
+	Successfully loaded component LegacyConfig (1.5.8.3079) with UID 24ef6216838f9ffc
+Loading component Checkpoints.so
+	Successfully loaded component Checkpoints (1.5.8.3079) with UID 44a937350d611dde
+Loading component LegacyNetwork.so
+	Successfully loaded component RakNetLegacyNetwork (1.5.8.3079) with UID ea9799fd79cf8442
+Loading component CustomModels.so
+	Successfully loaded component CustomModels (1.5.8.3079) with UID 15e3cb1e7c77ffff
+Loading component Console.so
+	Successfully loaded component Console (1.5.8.3079) with UID bfa24e49d0c95ee4
+Loading component Timers.so
+	Successfully loaded component Timers (1.5.8.3079) with UID 2ad8124c5ea257a3
+Loading component Objects.so
+	Successfully loaded component Objects (1.5.8.3079) with UID 59f8415f72da6160
+Loading component Menus.so
+	Successfully loaded component Menus (1.5.8.3079) with UID 621e219eb97ee0b2
+Loading component basic.so
+	Failed to load component: /lib/i386-linux-gnu/libc.so.6: version `GLIBC_ABI_GNU_TLS' not found (required by /home/alph4b3th/Projects/Rust/rakstar2/Server/components/basic.so).
+Loading component TextDraws.so
+	Successfully loaded component TextDraws (1.5.8.3079) with UID 9b5dc2b1d15c992a
+Loading component Pickups.so
+	Successfully loaded component Pickups (1.5.8.3079) with UID cf304faa363dd971
+Loading component Dialogs.so
+	Successfully loaded component Dialogs (1.5.8.3079) with UID 44a111350d611dde
+Loading component Classes.so
+	Successfully loaded component Classes (1.5.8.3079) with UID 8cfb3183976da208
+Loading component Vehicles.so
+	Successfully loaded component Vehicles (1.5.8.3079) with UID 3f1f62ee9e22ab19
+Loading component GangZones.so
+	Successfully loaded component GangZones (1.5.8.3079) with UID b3351d11ee8d8056
+Loaded 23 component(s) from /home/alph4b3th/Projects/Rust/rakstar2/Server/components
+[2026-01-31T12:52:22-0300] [Info] OMPRS Gamemode component has been loaded
+[2026-01-31T12:52:22-0300] [Info] Legacy Network started on port 7777
+[2026-01-31T12:52:23-0300] [Info] [connection] incoming connection: 172.20.224.1:55669 id: 0
+[2026-01-31T12:52:23-0300] [Info] [join] alph4b3th has joined the server (0:172.20.224.1)
+[2026-01-31T12:52:31-0300] [Info] [chat] [alph4b3th]: a
+[2026-01-31T12:52:33-0300] [Warning] Couldn't announce legacy network to open.mp list.
+[2026-01-31T12:52:33-0300] [Warning] 	 Status: 406
+[2026-01-31T12:52:33-0300] [Warning] 	 Message: {"error":"failed to query server: socket read timed out"}
+[2026-01-31T12:52:33-0300] [Warning] This won't affect the server's behaviour.

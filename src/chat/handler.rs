@@ -1,5 +1,5 @@
 use omp::types::colour::Colour;
-mod utils;
+use crate::utils;
 
 pub struct MsgBuilder {
     pub text: Option<String>,
@@ -15,7 +15,10 @@ impl MsgBuilder {
     }
 
     pub fn text(mut self, text: &str) -> Self {
-        self.text =  Some(text.into());
+        let bytes = utils::encode::cp_1252::to_cp1252(text);
+        let msg = utils::encode::cp_1252::cp1252_bytes_to_str(&bytes);
+        self.text =  Some(msg.into());
+        
         self
     }
 

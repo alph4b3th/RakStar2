@@ -1,6 +1,7 @@
 use std::{collections::HashMap, ops::Deref, str::FromStr};
 
 mod chat;
+mod utils;
 mod command;
 use chat::*;
 use command::*;

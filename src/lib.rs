@@ -1,6 +1,8 @@
 use std::{collections::HashMap, ops::Deref, str::FromStr};
 
+mod chat;
 mod command;
+use chat::*;
 use command::*;
 use omp::{events::Events, main, register, types::colour::Colour};
 
@@ -27,6 +29,8 @@ pub fn game_main() {
     let rakstar = MyGM {
         command_manager: command_manager,
     };
+
+    chat::oi();
 
     register!(rakstar);
 }

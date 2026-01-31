@@ -2,12 +2,13 @@ use std::{collections::HashMap, str::FromStr};
 
 use omp::players::Player;
 
-pub type CommandHandler = fn(context: CommandContext);
+pub type CommandHandler = fn(context: CommandContext) -> Result<(), String>;
 
 pub struct Command {
     pub identifier: String,
     pub handler: Option<CommandHandler>,
     pub validators: HashMap<u32, ArgValidator>,
+    pub subcommands: Vec<Command>,
 }
 
 pub enum ArgValidator {
@@ -220,6 +221,7 @@ pub struct CommandBuilder {
     identifier: String,
     handler: Option<CommandHandler>,
     validators: HashMap<u32, ArgValidator>,
+    subcommands: Vec<Command>,
 }
 
 impl<'a> CommandBuilder {
@@ -228,6 +230,7 @@ impl<'a> CommandBuilder {
             identifier: identifier.into(),
             validators: HashMap::new(),
             handler: None,
+            subcommands: Vec::new(),
         }
     }
 
@@ -242,11 +245,17 @@ impl<'a> CommandBuilder {
         self
     }
 
+    pub fn subcommand(mut self, subcommand: Command) -> Self {
+        self.subcommands.push(subcommand);
+        self
+    }
+
     pub fn build(self) -> Command {
         Command {
             identifier: self.identifier.to_owned(),
             handler: self.handler,
             validators: self.validators,
+            subcommands: self.subcommands,
         }
     }
 }
@@ -367,23 +376,35 @@ impl CommandManager {
     }
 
     pub fn process(&self, player: Player, command_text: String) {
+        let mut command_split = command_text.split_whitespace();
+
+        let Some(cmd) = command_split
+            .next()
+            .map(|cmd| cmd.strip_prefix("/"))
+            .flatten()
+        else {
+            return;
+        };
+
         for command in &self.commands {
-            let mut command_split = command_text.split_whitespace();
-
-            let Some(cmd) = command_split
-                .next()
-                .map(|cmd| cmd.strip_prefix("/"))
-                .flatten()
-            else {
-                return;
-            };
-
-            let args: Vec<&str> = command_split.collect();
-
             if cmd != command.identifier {
                 continue;
             }
 
+            let args: Vec<&str> = command_split.collect();
+            self.process_command(command, &args, player, &command_text);
+            return;
+        }
+    }
+
+    fn process_command(
+        &self,
+        command: &Command,
+        args: &[&str],
+        player: Player,
+        full_command_text: &str,
+    ) {
+        if let Some(handler) = command.handler {
             for (index, validator) in &command.validators {
                 let Some(arg) = args.get(*index as usize) else {
                     player.send_client_message(
@@ -402,19 +423,33 @@ impl CommandManager {
                 }
             }
 
-            let Some(handler) = command.handler else {
-                continue;
-            };
-
-            handler(CommandContext::new(
+            let result = handler(CommandContext::new(
                 player,
-                &command_text,
+                full_command_text,
                 CommandArgHandler {
-                    args,
+                    args: args.to_vec(),
                     index: 0,
                     validators: &command.validators,
                 },
-            ))
+            ));
+
+            if let Err(msg) = result {
+                player.send_client_message(omp::types::colour::Colour::from_rgba(0xFF0000FF), &msg);
+                return;
+            }
+
+            if command.subcommands.is_empty() {
+                return;
+            }
+        }
+
+        if !args.is_empty() && !command.subcommands.is_empty() {
+            for subcommand in &command.subcommands {
+                if subcommand.identifier == args[0] {
+                    self.process_command(subcommand, &args[1..], player, full_command_text);
+                    return;
+                }
+            }
         }
     }
 

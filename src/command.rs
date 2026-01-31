@@ -12,9 +12,9 @@ pub struct Command {
 
 pub enum ArgValidator {
     Player(PlayerConstraints),
-    String,
+    String(StringConstraints),
+    Number(NumberConstraints),
     Text,
-    Number,
 }
 
 impl ArgValidator {
@@ -28,10 +28,117 @@ impl ArgValidator {
 
                 constraints.validate(&player)
             }
-            ArgValidator::Number => Ok(()),
-            ArgValidator::String => Ok(()),
+            ArgValidator::Number(constraints) => {
+                let number: i32 = arg.parse().map_err(|_| "Invalid number".to_string())?;
+                constraints.validate(number)
+            }
+            ArgValidator::String(constraints) => constraints.validate(arg),
             ArgValidator::Text => Ok(()),
         }
+    }
+}
+
+pub struct NumberConstraints {
+    min: Option<i32>,
+    max: Option<i32>,
+    positive: bool,
+}
+
+impl NumberConstraints {
+    pub fn new() -> Self {
+        Self {
+            min: None,
+            max: None,
+            positive: false,
+        }
+    }
+
+    fn validate(&self, value: i32) -> Result<(), String> {
+        if self.positive && value <= 0 {
+            return Err("Number must be positive".to_string());
+        }
+
+        if let Some(min) = self.min {
+            if value < min {
+                return Err(format!("Number must be at least {}", min));
+            }
+        }
+
+        if let Some(max) = self.max {
+            if value > max {
+                return Err(format!("Number must be at most {}", max));
+            }
+        }
+
+        Ok(())
+    }
+
+    pub fn min(mut self, value: i32) -> Self {
+        self.min = Some(value);
+        self
+    }
+
+    pub fn max(mut self, value: i32) -> Self {
+        self.max = Some(value);
+        self
+    }
+
+    pub fn positive(mut self) -> Self {
+        self.positive = true;
+        self
+    }
+}
+
+pub struct StringConstraints {
+    min_length: Option<usize>,
+    max_length: Option<usize>,
+    pattern: Option<String>,
+}
+
+impl StringConstraints {
+    pub fn new() -> Self {
+        Self {
+            min_length: None,
+            max_length: None,
+            pattern: None,
+        }
+    }
+
+    fn validate(&self, value: &str) -> Result<(), String> {
+        if let Some(min) = self.min_length {
+            if value.len() < min {
+                return Err(format!("String must be at least {} characters", min));
+            }
+        }
+
+        if let Some(max) = self.max_length {
+            if value.len() > max {
+                return Err(format!("String must be at most {} characters", max));
+            }
+        }
+
+        if let Some(ref pattern) = self.pattern {
+            if !value.contains(pattern) {
+                return Err(format!("String must contain '{}'", pattern));
+            }
+        }
+
+        Ok(())
+    }
+
+    pub fn min_length(mut self, length: usize) -> Self {
+        self.min_length = Some(length);
+        self
+    }
+
+    pub fn max_length(mut self, length: usize) -> Self {
+        self.max_length = Some(length);
+        self
+    }
+
+    pub fn pattern(mut self, pattern: &str) -> Self {
+        self.pattern = Some(pattern.into());
+        self
     }
 }
 
@@ -171,18 +278,28 @@ pub struct CommandArgHandler<'a> {
 }
 
 impl<'a> CommandArgHandler<'a> {
-    pub fn next<T: FromStr>(&mut self) -> Option<T> {
-        if self.index >= self.args.len() {
-            return None;
+    fn check_validator_type(
+        &self,
+        expected: &str,
+        matcher: impl Fn(&ArgValidator) -> bool,
+    ) -> Result<(), String> {
+        if let Some(validator) = self.validators.get(&(self.index as u32)) {
+            if !matcher(validator) {
+                let actual_type = match validator {
+                    ArgValidator::Player(_) => "Player",
+                    ArgValidator::Number(_) => "Number",
+                    ArgValidator::String(_) => "String",
+                    ArgValidator::Text => "Text",
+                };
+                return Err(format!(
+                    "Validator mismatch at position {}: expected {}, but you used next_{}()",
+                    self.index,
+                    actual_type,
+                    expected.to_lowercase()
+                ));
+            }
         }
-
-        let val = self.args.get(self.index)?.parse::<T>().ok();
-
-        if val.is_some() {
-            self.index += 1;
-        }
-
-        val
+        Ok(())
     }
 
     pub fn next_text(&mut self) -> Option<String> {
@@ -198,24 +315,47 @@ impl<'a> CommandArgHandler<'a> {
     }
 
     pub fn next_player(&mut self) -> Result<Player, String> {
-        if let Some(validator) = self.validators.get(&(self.index as u32)) {
-            if !matches!(validator, ArgValidator::Player(_)) {
-                return Err(format!(
-                    "Validator type mismatch: expected Player validator at position {}",
-                    self.index
-                ));
-            }
+        self.check_validator_type("Player", |v| matches!(v, ArgValidator::Player(_)))?;
+
+        if self.index >= self.args.len() {
+            return Err("Missing player argument".to_string());
         }
 
-        let Some(player_id) = self.next() else {
-            return Err("Invalid player id.".into());
-        };
+        let arg = self.args[self.index];
+        let player_id: i32 = arg.parse().map_err(|_| "Invalid player id".to_string())?;
+        self.index += 1;
 
-        let Some(player) = Player::from_id(player_id) else {
-            return Err(String::from("Invalid player"));
-        };
+        let player =
+            Player::from_id(player_id).ok_or_else(|| format!("Player {} not found", player_id))?;
 
         Ok(player)
+    }
+
+    pub fn next_number<T: FromStr>(&mut self) -> Result<T, String> {
+        self.check_validator_type("Number", |v| matches!(v, ArgValidator::Number(_)))?;
+
+        if self.index >= self.args.len() {
+            return Err("Missing number argument".to_string());
+        }
+
+        let arg = self.args[self.index];
+        let val = arg.parse::<T>().map_err(|_| "Invalid number".to_string())?;
+        self.index += 1;
+
+        Ok(val)
+    }
+
+    pub fn next_string(&mut self) -> Result<String, String> {
+        self.check_validator_type("String", |v| matches!(v, ArgValidator::String(_)))?;
+
+        if self.index >= self.args.len() {
+            return Err("Missing string argument".to_string());
+        }
+
+        let arg = self.args[self.index].to_string();
+        self.index += 1;
+
+        Ok(arg)
     }
 }
 

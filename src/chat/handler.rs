@@ -18,6 +18,7 @@ impl MsgBuilder {
         // let bytes = utils::encode::cp_1252::to_cp1252(text);
         // let msg = utils::encode::cp_1252::cp1252_bytes_to_str(&bytes);
         let msg = text;
+      
         self.text = Some(msg.into());
         self
     }

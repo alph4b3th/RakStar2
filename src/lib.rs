@@ -1,15 +1,16 @@
+pub mod command;
+pub mod chat;
+pub mod utils;
+
 use std::{collections::HashMap, ops::Deref, str::FromStr};
 
-mod chat;
-mod command;
-mod utils;
 
-use chat::*;
+// use chat::*;
 
 use omp::{events::Events, main, register, types::colour::Colour};
 
-struct MyGM {
-    command_manager: command::handler::CommandManager,
+pub struct MyGM {
+    pub command_manager: command::handler::CommandManager,
 }
 
 impl Events for MyGM {
